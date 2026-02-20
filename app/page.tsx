@@ -50,7 +50,7 @@ export default function Home() {
   };
 
   const handleLikeRTClick = () => {
-    const tweetId = '2024519345146060814';
+    const tweetId = '2024760578024362061';
     window.open(`https://twitter.com/intent/retweet?tweet_id=${tweetId}`, '_blank', 'width=550,height=450');
     setTimeout(() => setQuestLikeRT(true), 2000);
   };
