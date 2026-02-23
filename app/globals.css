@@ -1,304 +1,145 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;900&display=swap');
 
-body {
-  font-family: 'Press Start 2P', cursive;
-  background-color: #1a0b2e; 
-  color: #ffffff;
-  overflow-x: hidden;
-}
+/* Reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background-color: #000; overflow-x: hidden; color: #fff; }
 
 .app-container {
   min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   position: relative;
-  /* Pastikan background.png ada di folder public */
   background-image: url('/background.png'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding: 20px;
+  background-attachment: fixed;
+  background-color: #1a102e;
+  background-blend-mode: soft-light;
 }
 
 .overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, rgba(26, 11, 46, 0.7), rgba(89, 28, 135, 0.8));
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(180deg, rgba(20, 10, 40, 0.3) 0%, rgba(0, 0, 0, 0.9) 100%);
   z-index: 1;
 }
 
-.content-box {
-  position: relative;
-  z-index: 2; 
-  background: rgba(0, 0, 0, 0.6);
-  padding: 2.5rem 2rem;
-  border: 4px solid #ff4500;
-  border-radius: 8px;
-  text-align: center;
-  max-width: 500px;
-  width: 100%;
-  box-shadow: 0 0 20px rgba(255, 69, 0, 0.5); 
-}
-
-.logo {
-  max-width: 250px;
-  width: 100%;
-  margin-bottom: 1.5rem;
-  transition: transform 0.2s;
-}
-.logo:hover {
-  transform: scale(1.05);
-}
-
-.title {
-  font-size: 1.2rem;
-  color: #ffdd00; 
-  margin-bottom: 0.8rem;
-  text-transform: uppercase;
-  line-height: 1.4;
-}
-
-.subtitle {
-  font-size: 0.65rem;
-  color: #a8a8ff;
-  margin-bottom: 1rem;
-  line-height: 1.6;
-}
-
-.instruction-text {
-  font-size: 0.6rem;
-  color: #a8a8ff;
-  margin-bottom: 1rem;
-  line-height: 1.5;
-}
-
-.pixel-button {
+/* LIVE STATUS */
+.live-status {
+  position: fixed;
+  top: 20px; right: 20px;
+  background: rgba(255, 77, 0, 0.1);
+  border: 1px solid #ff4d00;
+  color: #ff4d00;
+  padding: 8px 15px;
   font-family: 'Press Start 2P', cursive;
-  font-size: 0.8rem;
-  padding: 12px 24px;
-  border: 4px solid;
-  cursor: pointer;
-  position: relative;
-  text-transform: uppercase;
-  outline: none;
-  transition: all 0.1s;
-  width: 100%;
-  box-shadow: 4px 4px 0px #000;
-}
-
-.pixel-button:active {
-  transform: translate(4px, 4px);
-  box-shadow: none;
-}
-.pixel-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.twitter-btn {
-  background-color: #1da1f2;
-  color: white;
-  border-color: #0d8ddb;
-  margin-bottom: 1rem;
-}
-.twitter-btn:hover:not(:disabled) {
-  background-color: #4db6ff;
-}
-
-.unlocked-content {
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-.twitter-connected {
-  font-size: 0.7rem;
-  margin-bottom: 1.5rem;
-  color: #00ff88; 
-  padding: 15px;
-  border: 2px dashed #00ff88;
-  line-height: 1.6;
-  background: rgba(0, 255, 136, 0.05);
-}
-.handle {
-  color: #ffffff;
-  font-weight: bold;
-}
-
-.logout-btn {
-  background-color: #333;
-  color: #fff;
-  border-color: #111;
-  font-size: 0.6rem;
-  padding: 8px;
-  margin-top: 15px;
-  box-shadow: 2px 2px 0px #000;
-}
-.logout-btn:hover {
-  background-color: #555;
-}
-
-.quest-container {
-  background: rgba(0, 0, 0, 0.4);
-  border: 2px dashed #a8a8ff;
-  padding: 15px;
-  border-radius: 5px;
-  margin-bottom: 1.5rem;
-  text-align: left;
-}
-
-.quest-title {
-  font-size: 0.7rem;
-  color: #ffdd00;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-  text-align: center;
-}
-
-.quest-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 10px;
+  font-size: 0.5rem;
+  z-index: 100;
   border-radius: 4px;
 }
-.quest-item:last-child {
-  margin-bottom: 0;
+
+.live-status .dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  background: #ff4d00;
+  border-radius: 50%;
+  margin-right: 8px;
+  animation: blink 1s infinite;
 }
 
-.quest-name {
-  font-size: 0.6rem;
-  color: #ffffff;
+@keyframes blink { 50% { opacity: 0.3; } }
+
+.main-content-box {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 80px 20px;
+  width: 100%;
+  max-width: 900px;
 }
 
-.quest-btn {
-  font-size: 0.5rem;
-  padding: 8px 12px;
-  width: auto;
-  background-color: #591c87;
-  border-color: #7e22ce;
-  color: white;
-}
-.quest-btn:hover {
-  background-color: #7e22ce;
+/* TAMBAHAN INTRODUCING */
+.introducing-text {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+  color: #ff4d00;
+  margin-bottom: 20px;
+  letter-spacing: 3px;
 }
 
-.quest-done {
-  font-size: 0.6rem;
-  color: #00ff88;
-  font-weight: bold;
-  text-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
+.main-logo { width: 180px; margin-bottom: 20px; }
+.main-title { font-family: 'Press Start 2P', cursive; font-size: 3rem; text-shadow: 4px 4px #ff4d00; margin-bottom: 20px; }
+.lore-text { font-family: 'Press Start 2P', cursive; font-size: 0.75rem; color: #aaa; margin-bottom: 60px; line-height: 1.5; }
+
+/* MINT DASHBOARD */
+.mint-dashboard {
+  background: rgba(13, 2, 33, 0.9);
+  border: 4px solid #ff4d00;
+  padding: 40px 20px;
+  margin-bottom: 60px;
 }
 
-.wallet-form {
+.dashboard-title { font-family: 'Press Start 2P', cursive; font-size: 1rem; color: #ffeb3b; margin-bottom: 40px; }
+
+.phases-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.phase-card {
+  flex: 1;
+  min-width: 240px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid #333;
+  padding: 30px 20px;
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  align-items: center;
 }
 
-.input-group {
+.phase-badge { background: #ff4d00; font-family: 'Press Start 2P', cursive; font-size: 0.5rem; padding: 6px 10px; margin-bottom: 15px; display: inline-block; }
+.phase-card h3 { font-family: 'Press Start 2P', cursive; font-size: 1.1rem; }
+
+.phase-desc { 
+  font-family: 'Press Start 2P', cursive; 
+  font-size: 0.5rem; 
+  color: #777; 
+  margin-top: 15px; 
+  line-height: 1.8; 
+}
+
+/* DETAILS GRID */
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 60px;
   text-align: left;
 }
 
-.input-group label {
-  font-size: 0.65rem;
-  display: block;
-  margin-bottom: 10px;
-  color: #ff4500;
-}
+.detail-item { border: 1px solid #222; padding: 30px; background: rgba(13, 2, 33, 0.4); }
+.detail-item h3 { font-family: 'Press Start 2P', cursive; font-size: 0.75rem; color: #ff4d00; margin-bottom: 15px; }
+.detail-item p { font-family: 'Outfit', sans-serif; font-size: 0.95rem; line-height: 1.5; color: #ccc; text-transform: uppercase; }
 
-.input-group input {
-  width: 100%;
-  padding: 14px;
-  font-family: 'Courier New', monospace; 
-  font-weight: bold;
-  background-color: #0a0a0a;
-  border: 3px solid #333;
-  color: #00ff88; 
-  outline: none;
-  font-size: 0.9rem;
-}
+/* FAQ & SOCIAL */
+.section-title { font-family: 'Press Start 2P', cursive; font-size: 1.1rem; color: #ff4d00; margin-bottom: 30px; text-align: left; }
+.faq-section { text-align: left; margin-bottom: 60px; }
+.faq-item { margin-bottom: 25px; border-bottom: 1px solid #111; padding-bottom: 15px; }
+.faq-item h3 { font-family: 'Press Start 2P', cursive; font-size: 0.7rem; margin-bottom: 10px; line-height: 1.4; }
+.faq-item p { font-family: 'Outfit', sans-serif; font-size: 0.9rem; color: #666; font-weight: bold; text-transform: uppercase; line-height: 1.4; }
 
-.input-group input:focus {
-  border-color: #ff4500;
-  box-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
-}
-.input-group input:disabled {
-  background-color: #222;
-  color: #555;
-  border-color: #222;
-}
+.social-box { padding: 40px; border: 1px dashed #333; margin-bottom: 40px; }
+.social-btn { font-family: 'Press Start 2P', cursive; font-size: 0.8rem; color: #fff; text-decoration: none; }
+.social-btn:hover { color: #ff4d00; }
 
-.submit-btn {
-  background-color: #ff4500; 
-  color: #fff;
-  border-color: #cc3700;
-  margin-top: 0.5rem;
-}
-.submit-btn:hover:not(:disabled) {
-  background-color: #ff6a00;
-  box-shadow: 0 0 15px rgba(255, 69, 0, 0.8), 4px 4px 0px #000;
-}
+.main-footer { font-family: 'Press Start 2P', cursive; color: #222; font-size: 0.6rem; padding-bottom: 40px; line-height: 1.5; }
 
-.status-message {
-  font-size: 0.65rem;
-  margin: 10px 0;
-  min-height: 1.2em;
-  line-height: 1.5;
-}
-.warning { color: #ffdd00; }
-.success { color: #00ff88; text-shadow: 0 0 5px rgba(0, 255, 136, 0.5); }
-
-.footer {
-  position: absolute;
-  bottom: 15px;
-  font-size: 0.5rem;
-  color: rgba(255, 255, 255, 0.4);
-  z-index: 2;
-  letter-spacing: 1px;
-}
-
-@media (max-width: 480px) {
-  .content-box {
-    padding: 1.5rem;
-    border-width: 3px;
-  }
-  .title {
-    font-size: 1rem;
-  }
-  .pixel-button {
-    font-size: 0.7rem;
-    padding: 10px 15px;
-  }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.success-badge {
-  background-color: #00ff88;
-  color: #000;
-  padding: 15px;
-  font-size: 0.7rem;
-  border: 4px solid #000;
-  box-shadow: 4px 4px 0px #000;
-  margin: 20px 0;
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+@media (max-width: 768px) {
+  .main-title { font-size: 2rem; }
+  .phase-card { min-width: 100%; }
 }
