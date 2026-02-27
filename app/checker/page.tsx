@@ -20,9 +20,11 @@ export default function CheckerPage() {
       return;
     }
 
+    // Check status in both datasets
     const isGtd = gtdData.includes(cleanAddress);
     const isFcfs = fcfsData.includes(cleanAddress);
 
+    // Display result based on status combination
     if (isGtd && isFcfs) {
       setStatus('🎉 CONGRATS! YOU HAVE BOTH GTD & FCFS ACCESS ⛩️🩸');
     } else if (isGtd) {
@@ -125,13 +127,13 @@ export default function CheckerPage() {
           transform: translateY(4px) translateX(4px);
         }
 
-        /* --- MOBILE RESPONSIVE FIX (HANYA UKURAN) --- */
+        /* --- MOBILE RESPONSIVE FIX (SIZE ONLY) --- */
         @media (max-width: 768px) {
           .main-title {
-            font-size: 1.4rem !important; /* Supaya teks judul gak kepotong */
+            font-size: 1.4rem !important; /* Prevents title from clipping */
           }
           .checker-input {
-            font-size: 0.7rem !important; /* Input lebih kecil di HP */
+            font-size: 0.7rem !important; /* Smaller input for mobile */
             max-width: 280px;
           }
           .checker-btn {
@@ -155,6 +157,7 @@ export default function CheckerPage() {
         
         <div className="ritual-game-area">
           
+          {/* LOGO SIZE 250px */}
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '30px', zIndex: 10 }}>
             <img 
               src="/logo.png" 
@@ -163,8 +166,10 @@ export default function CheckerPage() {
             />
           </div>
 
+          {/* MAIN BOX */}
           <div className="main-content-box mint-dashboard" style={{ zIndex: 10, maxWidth: '700px', width: '100%', textAlign: 'center' }}>
             
+            {/* MAIN TITLE */}
             <h1 className="main-title" style={{ 
               fontSize: '2.5rem', 
               fontWeight: '400', 
@@ -179,6 +184,7 @@ export default function CheckerPage() {
             
             <div style={{ padding: '20px 0', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               
+              {/* WALLET INPUT */}
               <input 
                 type="text"
                 className="checker-input"
@@ -190,6 +196,7 @@ export default function CheckerPage() {
                 }}
               />
 
+              {/* VERIFY BUTTON */}
               <button 
                 className="checker-btn"
                 onClick={checkWallet}
@@ -197,6 +204,7 @@ export default function CheckerPage() {
                 VERIFY
               </button>
 
+              {/* STATUS RESULT */}
               {status && (
                 <p className="lore-text" style={{ 
                   marginTop: '30px', 
@@ -215,6 +223,7 @@ export default function CheckerPage() {
           </div>
         </div>
 
+        {/* FOOTER */}
         <footer className="clean-footer">
           <div className="clean-footer-text">
             © 2026 Goryo Goose. All rights reserved.
